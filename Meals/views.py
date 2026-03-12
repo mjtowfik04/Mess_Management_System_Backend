@@ -1,15 +1,14 @@
 from django.db.models import Sum, F, ExpressionWrapper, IntegerField
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import meal
 from .serializers import MealSerializer
 from Bazar.models import Extra_Charge, Add_Cost
+from api.permissions import IsStaffOrReadOnly
 
 class MealViewSet(ModelViewSet):
     serializer_class = MealSerializer
-    permission_classes = [IsAuthenticated]
-
+    permission_classes = [IsStaffOrReadOnly]
     def get_queryset(self):
         return meal.objects.select_related("member", "month")  # Optimization
 

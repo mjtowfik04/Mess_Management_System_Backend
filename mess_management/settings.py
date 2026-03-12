@@ -1,4 +1,8 @@
 from pathlib import Path
+from datetime import timedelta
+from api.permissions import IsStaffOrReadOnly
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -118,4 +122,20 @@ DJOSER = {
         'user': 'Users.serializers.UserSerializer',        # lowercase
         'user_create': 'Users.serializers.UserCreateSerializer',
     }
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('Bearer', 'JWT',),
+   'ACCESS_TOKEN_LIFETIME': timedelta(days=1), 
+   'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
+}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'api.permissions.IsStaffOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
