@@ -5,6 +5,8 @@ from .models import meal
 from .serializers import MealSerializer
 from Bazar.models import Extra_Charge, Add_Cost
 from api.permissions import IsStaffOrReadOnly
+from rest_framework.decorators import action
+
 
 class MealViewSet(ModelViewSet):
     serializer_class = MealSerializer
@@ -41,3 +43,14 @@ class MealViewSet(ModelViewSet):
         }
 
         return Response(response)
+    
+
+    # @action(detail=False,methods=['GET'],url_path='meal_report')
+    # def meal_report(salf,request):
+    #     user=request.user
+
+    #     if user.is_staff():
+    #         return None
+        
+    
+    
