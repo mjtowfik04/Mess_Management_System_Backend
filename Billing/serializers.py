@@ -10,3 +10,4 @@ class AddMemberMoneySerializers(serializers.ModelSerializer):
     class Meta:
         model=AddMemberMoney
         fields='__all__'
+

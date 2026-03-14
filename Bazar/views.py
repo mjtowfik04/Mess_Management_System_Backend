@@ -4,7 +4,7 @@ from rest_framework import mixins, viewsets
 from rest_framework.response import Response
 from django.db.models import Sum
 from api.permissions import IsStaffOrReadOnly
-
+from api.paginations import DefaultPagination
 
 class AddCostViewSet(
         mixins.CreateModelMixin,
@@ -15,6 +15,7 @@ class AddCostViewSet(
     serializer_class = Add_Cost_serializers
     queryset = Add_Cost.objects.all()
     permission_classes = [IsStaffOrReadOnly]
+    pagination_class=DefaultPagination
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
 
@@ -50,6 +51,8 @@ class ExtraChargeViweSet(
 
     serializer_class = Extra_Charge_Serializers
     queryset = Extra_Charge.objects.all()
+    pagination_class=DefaultPagination
+
 
     permission_classes = [IsStaffOrReadOnly]
     def list(self, request, *args, **kwargs):
